@@ -1,11 +1,31 @@
-from entities import *
+from defs import *
 
 random.seed()
 
-initialPop = []
-for i in range(NUMBER_OF_CROMOSSOMES):
-    initialPop.append(Schedule())
+#step1 - initial population
+population = initRandomPopulation()
 
-for schedule in initialPop:
-    schedule.randomizeGenome(CROMOSSOME_SIZE)
+
+#print of population
+for schedule in population:
     schedule.print()
+
+
+
+
+#select match cross mutate terminate?
+i = 0
+while(i != 1):
+    #step2 - selection
+    #List with the respective probability for each element in population to be selected for matching
+    selectionProb = selectionProbabilities(population)
+    print(selectionProb)
+    #Criar intervalos, gerar random numbers NUMBER_OF_CROMOSSOMES times, emparelhar esses, cruzal-los, mutá-los 
+    i+=1
+
+
+
+
+
+
+
