@@ -1,5 +1,7 @@
 from entities import *
 
+random.seed()
+
 initialPop = []
 for i in range(NUMBER_OF_CROMOSSOMES):
     initialPop.append(Schedule())
