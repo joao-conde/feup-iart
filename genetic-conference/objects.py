@@ -1,9 +1,7 @@
 import random
 
-
-#creates an interval from ]lb, up]
+# Creates an interval ]lb, up].
 class Interval():
-    
     def __init__(self, lb, ub):
         self.lb = lb
         self.ub = ub
@@ -12,10 +10,9 @@ class Interval():
         return (x > self.lb and x <= self.ub)
 
     def print(self):
-        print("Interval ]",self.lb,',',self.ub,']')
+        print("Interval ]", self.lb, ',', self.ub, ']')
 
 class Schedule():
-    
     def __init__(self):
         self.DNA = []
 
@@ -27,6 +24,6 @@ class Schedule():
         return self.DNA.count(1)
 
     def print(self):
-        print("My genome is",self.DNA,"and my value is",self.fitness())
+        print("My genome is", self.DNA, "and my value is", self.fitness())
 
     

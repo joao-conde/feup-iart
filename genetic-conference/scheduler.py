@@ -1,6 +1,6 @@
 from defs import *
 from objects import *
-
+from scheduler import *
 
 random.seed()
 
@@ -10,7 +10,6 @@ population = init_random_population()
 #schedule = Schedule()
 #schedule.DNA = [1,1,1,1,1,1,1,1,1,1]
 #population[0] = schedule
-
 
 i = 0
 while(i != 1):

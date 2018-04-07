@@ -6,6 +6,7 @@ CROMOSSOME_SIZE = 10
 #initial population - random genes
 def init_random_population():
     population = []
+    
     for i in range(NUMBER_OF_CROMOSSOMES):
         schedule = Schedule()
         schedule.randomize_genome(CROMOSSOME_SIZE)
