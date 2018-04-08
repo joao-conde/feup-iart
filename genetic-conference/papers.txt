@@ -1,0 +1,3 @@
+Understanding Neural Networks | Minsky, Hofstadter | AI, Machine Learning | 30
+Cracking GO by Scratch | Russel, Minsky | Machine Learning | 20
+Predicting an Heart Attack | Norvig, Kurzweil | AI, Medicine | 30 

@@ -1,0 +1,13 @@
+# Genetic constants
+NUMBER_OF_CROMOSSOMES = 6
+
+# Conference limitations
+NUMBER_OF_ROOMS = 3
+MAX_START_BLOCK = 64
+
+# Attribute bit encoding
+ID_BIT_ENCODING = 6
+ROOM_BIT_ENCODING = 4
+DAY_BIT_ENCODING = 2
+BLOCK_BIT_ENCODING = 7
+SPEAKER_BIT_ENCODING = 3

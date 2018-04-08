@@ -1,54 +1,89 @@
+import re
+from morph import flatten
 from conference import *
 from random import *
-from morph import flatten
+from macros import *
 
-NUMBER_OF_CROMOSSOMES = 6
-NUMBER_OF_ROOMS = 3
-MAX_START_BLOCK = 64    # Talks start from 9AM to 6:40PM.
+'''
+Até agora, o código dá parse aos papers inseridos manualmente pelo usuário em papers.txt e 
+aplica regex a cada linha do ficheiro, criando objetos da classe Paper (método init_papers).
 
-def hard_coded_insertion():
-    papers = []
+O algoritmo genético irá operar sobre o tuplo <id_paper, room_no, day, block_start, speaker_index>.
+Para cada paper existe um tuplo destes, sendo a representação apenas uma lista de onde, quando e
+quem dá cada talk.
 
-    papers.append(Paper(0, ['Minsky', 'Hofstadter'], ['AI', 'Machine Learning'], 30))
-    papers.append(Paper(1, ['Russell', 'Minsky'], ['Machine Learning'], 20))
-    papers.append(Paper(2, ['Norvig', 'Kurzweil'], ['AI', 'Medicine'], 30))
+Gera-se um tuplo para cada talk em init_paper_tuple, aleatoriamente. As macros usadas são o número
+de bits usado para codificar certo atributo (4 bits para codificar o número da sala).
 
+No fim, o genótipo é composto por todos os tuplos seguidos. Repete-se o processo NUMBER_OF_CROMOSSOMES
+vezes e temos a população inicial. A conversão para objeto Presentation é no método generate_conference,
+que ainda está incompleto (só gera apresentações e não uma conferência inteira, embora já tenha dados
+para tal). Tem uma data de regex manhoso para não estar a encher o código de merda desnecessária.
+
+Leiam o código, por favor, porque sou capaz de jogar CS pela noite fora, acordar tarde e a más horas
+e não vos consigo ajudar a perceber.
+
+Plus, faz-me LBAW por favor, Zé. Já não consigo olhar para a merda do Markdown do Github. Posso fazer a 
+tua parte do relatório e acrescentar um almoço à pala, se quiseres trocar.
+
+Apaguem isto se mexerem no código. Love you all.
+
+- Miguel
+'''
+
+def init_papers(file_path):
+    file = open(file_path, 'r')
+    papers, paper_list = [], file.readlines()
+
+    for id, paper in enumerate(paper_list):
+        m = re.search(r'(?P<title>.+) \| (?P<authors>.+) \| (?P<themes>.+) \| (?P<duration>20|30)', paper)
+        papers.append(Paper(id, m.group('title'), m.group('authors').split(', '), m.group('themes').split(', '), m.group('duration')))
+
+    file.close()
     return papers
 
-def init_random_conference(papers):
-    days, sessions, presentations = [], [], []
+# Initialize <Paper, Room, Day, TimeBlock, Speaker> tuples.
+def init_paper_tuple(papers):
+    genotype = ''
 
-    # Generate a random presentation for each paper.
-    for id, paper in enumerate(papers):
-        author = randint(0, len(paper.authors))
-        block = randint(0, MAX_START_BLOCK)
+    for paper in papers:
+        p_id = format(paper.id, f'0{ID_BIT_ENCODING}b')
+        p_room = format(randint(1, NUMBER_OF_ROOMS), f'0{ROOM_BIT_ENCODING}b')
+        p_day = format(randint(1, 3), f'0{DAY_BIT_ENCODING}b')
+        p_block = format(randint(0, MAX_START_BLOCK), f'0{BLOCK_BIT_ENCODING}b')
+        p_speaker = format(randint(0, len(paper.authors) - 1), f'0{SPEAKER_BIT_ENCODING}b')
 
-        presentations.append(Presentation(id, paper, author, block))
+        genotype += f'{p_id}{p_room}{p_day}{p_block}{p_speaker}'
 
-    # Generate random sessions for each presentation.
-    themes = list(set(flatten([pres.paper.themes for pres in presentations])))
+    return genotype
 
-    for id in range(0, len(presentations) - 1):
-        k = randint(1, len(presentations))
-        sessions.append(Session(id, choice(themes), choices(presentations, k=k), randint(1, NUMBER_OF_ROOMS)))
+def init_initial_population(papers):
+    population = []
 
-    # Generate random days.
-    for id in range(3):
-        days.append(Day(id, choice(sessions)))
-
-    return Conference(days)
-
-def generate_initial_population():
-    papers = hard_coded_insertion()
-    
     for i in range(NUMBER_OF_CROMOSSOMES):
-        conference = init_random_conference(papers)
-        conference.export_to_spreadsheet()
+        genotype = init_paper_tuple(papers)
+        print(f'\nGenerated genotype #{i+1}: \n{genotype}')
+        population.append(genotype)
+    
+    return population
 
-generate_initial_population()
+def generate_conference(genotype):
+    r = re.findall(r'.{22}', genotype)
+    
+    for i, paper_tuple in enumerate(r):
+        m = re.match(r'(?P<id>.{6})(?P<room>.{4})(?P<day>.{2})(?P<block>.{7})(?P<speaker>.{3})', paper_tuple)
+        d = {key: int(value, 2) for key, value in m.groupdict().items()}  # Converts tuple to a dictionary with integer values.
 
+        paper = papers[d.get('id')]
+        presentation = Presentation(i, paper, paper.authors[d.get('speaker')], d.get('block'))
+        print(vars(presentation))
+    
+papers = init_papers('papers.txt')
+population = init_initial_population(papers)
 
-
+for i, genotype in enumerate(population):
+    print(f'\nConverting genotype #{i+1} from binary to Conference object...')
+    generate_conference(genotype)
 
 
 

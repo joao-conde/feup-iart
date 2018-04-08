@@ -32,14 +32,14 @@ class Presentation():
         self.start = start
 
 class Paper():
-    def __init__(self, id, authors, themes, duration):
+    def __init__(self, id, title, authors, themes, duration):
         self.id = id
+        self.title = title
         self.authors = authors
         self.themes = themes
         self.duration = duration  # Either 20 mins (short-paper) or 30 mins (full-paper).
 
 def insert_conference_info(conference, workbook):
-    for i in range(3):
-        pass
+    pass
 
 
