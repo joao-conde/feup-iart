@@ -19,16 +19,6 @@ No fim, o genótipo é composto por todos os tuplos seguidos. Repete-se o proces
 vezes e temos a população inicial. A conversão para objeto Presentation é no método generate_conference,
 que ainda está incompleto (só gera apresentações e não uma conferência inteira, embora já tenha dados
 para tal). Tem uma data de regex manhoso para não estar a encher o código de merda desnecessária.
-
-Leiam o código, por favor, porque sou capaz de jogar CS pela noite fora, acordar tarde e a más horas
-e não vos consigo ajudar a perceber.
-
-Plus, faz-me LBAW por favor, Zé. Já não consigo olhar para a merda do Markdown do Github. Posso fazer a 
-tua parte do relatório e acrescentar um almoço à pala, se quiseres trocar.
-
-Apaguem isto se mexerem no código. Love you all.
-
-- Miguel
 '''
 
 def init_papers(file_path):
