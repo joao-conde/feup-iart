@@ -5,17 +5,29 @@ from random import *
 from macros import *
 from fitness import *
 from crossover import *
+from utilities import *
 
 """
     Genetic Algorithm based scheduler application entry point.
 """
 def main():
-    print('\n⏳  Genetic Conference Scheduler (v1.0)\n')
+    print('\n⏳  Genetic Conference Scheduler (v1.0)')
     
     # Initialize population.
     papers = parse_paper_file(input('Paper file path: '))
+    wb_path = input('Spreadsheet path: ')
+
     population = init_population(papers)
 
+    for gen_no in range(GENERATIONS):
+        # export_to_spreadsheet(wb_path, population)
+        print(f'Handling generation #{gen_no + 1}...\n')
+        population = manage_generation(population)
+
+
+"""
+"""
+def manage_generation(population):
     # Evaluate each individual from the population.
     scores = calculate_pop_fitness(population)
 
@@ -25,6 +37,12 @@ def main():
 
     # Crossover initialization.
     children = xover_population(couples)
+
+    # Mutate resulting children.
+    zombies = mutate_population(children)
+
+    # Return new generation.
+    return zombies
 
 
 """
@@ -45,26 +63,24 @@ def parse_paper_file(file_path):
 
 
 """
-    Generates a semi-random individual in its binary representation.
-    The genotype is composed of a dictionary containing a pointer for the paper object, talk's room, day
-    and starting ten minute block for it.
-"""
-def init_conference(papers):
-    conference = []
-
-    for paper in papers:
-        gen_room, gen_day, gen_block = randint(1, NUMBER_OF_ROOMS), randint(1, 3), randint(0, MAX_START_BLOCK)
-        conference.append({'paper': paper, 'room': gen_room, 'day': gen_day, 'time': gen_block})
-        
-    return conference
-
-
-"""
     Generates a semi-random population composed of NUMBER_OF_CROMOSSOMES macro number of individuals.
     The population is a list of possible schedules of a conference, which is itself a list of talk schedules.
 """
 def init_population(papers):
     population = []
+
+    """
+        Generates a semi-random individual in its binary representation.
+        The genotype is composed of a dictionary containing a pointer for the paper object, talk's room, day
+        and starting ten minute block for it.
+    """
+    def init_conference(papers):
+        conference = []
+        
+        for paper in papers:
+            gen_room, gen_day, gen_block = randint(1, NUMBER_OF_ROOMS), randint(1, 3), randint(0, MAX_START_BLOCK)
+            conference.append({'paper': paper, 'room': gen_room, 'day': gen_day, 'time': gen_block})
+        return conference
 
     for _ in range(NUMBER_OF_CROMOSSOMES):
         population.append(init_conference(papers))

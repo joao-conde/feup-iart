@@ -1,5 +1,3 @@
-import xlsxwriter
-
 class Paper():
     def __init__(self, id, title, speaker, themes, duration):
         self.id = id

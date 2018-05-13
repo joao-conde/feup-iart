@@ -50,7 +50,6 @@ def xover_parents(mother, father):
     return mother
 
 
-
 """
     Crossover this generation's entire population.
     Returns a list of crossed-over children.
@@ -63,3 +62,10 @@ def xover_population(couples):
         children.append(child)
 
     return children
+
+
+"""
+    TODO: Implement mutation & documentate.
+"""
+def mutate_population(population):
+    return population

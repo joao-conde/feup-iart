@@ -1,4 +1,5 @@
 # Genetic constants
+GENERATIONS = 1
 NUMBER_OF_CROMOSSOMES = 6
 
 # Input constants
