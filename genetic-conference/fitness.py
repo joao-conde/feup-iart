@@ -3,6 +3,21 @@ from macros import *
 from statistics import stdev, mean
 import itertools
 
+
+
+"""
+    Computes the fitness score of this generation's population.
+    Returns a list of pairs which map the individual and its score.
+"""
+def calculate_pop_fitness(population):
+    scores = []
+
+    for individual in population:
+        scores.append((individual, calculate_fitness(individual)))
+
+    return scores
+
+
 """
     Applies a number of tests to a provided individual and returns an average of calculated scores.
 """
@@ -71,10 +86,19 @@ def score_sessions(individual):
         for day_i in range(3):
             room_talk = [talk for talk in individual if talk['room'] == room_i + 1 and talk['day'] == day_i + 1]
             room_talks.append(room_talk)
-
-    
-
-    
-
+            
     return 100
     
+
+def get_most_fit(pop_scores):
+    scores = [el[1] for el in pop_scores]
+    return pop_scores[scores.index(max(scores))][0]
+
+def get_worst_fit_pos(pop_scores):
+    scores = [el[1] for el in pop_scores]
+    return scores.index(min(scores))
+
+
+'''
+    Speakers requeridos ao mesmo tempo
+'''

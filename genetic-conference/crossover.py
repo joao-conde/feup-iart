@@ -1,5 +1,6 @@
 from random import *
 from macros import *
+from fitness import get_worst_fit_pos, calculate_pop_fitness
 
 """
     Generate a roulette wheel based on the fitness score of the individuals.
@@ -45,7 +46,7 @@ def spin_roulette(roulette, population):
     Returns the resulting child.
 """
 def xover_parents(mother, father):
-    print("\n------CROSSOVER------\n")
+    #print("\n------CROSSOVER------\n")
 
     child1 , child2 = [] , []
 
@@ -58,12 +59,6 @@ def xover_parents(mother, father):
             child1.append(presentation2)
             child2.append(presentation1)
 
-    print("---Children---")
-    print("Child1")
-    print_conference(child1)
-    print("Child2")
-    print_conference(child2)
-    
     return [child1,child2]
 
 
@@ -75,23 +70,18 @@ def xover_population(couples):
     children = []
 
     for couple in couples: 
-        print("\n\n-------Couple---------")
-        for parent in couple:
-            print("One parent")
-            print_conference(parent)
-        
         childs = xover_parents(couple[0], couple[1])
         children.extend(childs)
 
     return children
 
 
-"""
-    TODO: Implement mutation & documentate.
-"""
-def mutate_population(population):
-    return population
 
+def elitism_policy(children, best_child):
+    scores = calculate_pop_fitness(children)
+    children[get_worst_fit_pos(scores)] = best_child
+    return children
+    
 
 
 def print_conference(conference):

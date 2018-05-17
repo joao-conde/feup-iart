@@ -21,3 +21,7 @@ def export_to_spreadsheet(wb_path, individual):
         ws.cell(row=r , column=c , value=talk['paper'].id)
 
     wb.save('results.xlsx')
+
+def print_conference(conference):
+    for presentation in conference:
+        print(presentation)
