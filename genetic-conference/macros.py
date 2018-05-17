@@ -6,7 +6,7 @@ DESIRED_FITNESS = 85
 
 # Conference limitations
 NUMBER_OF_ROOMS =   3
-MAX_START_BLOCK =   64
+MAX_START_BLOCK =   57
 
 # Break Scheduling
 COFFEE_1_START =    6
@@ -20,3 +20,8 @@ COFFEE_2_END =      51
 FIT_COLLISIONS =    True
 FIT_ROOM_OCC =      True
 FIT_SPEAKER_OCC =   True
+FIT_SESSIONS =      True
+
+# Spreadsheet parameters
+SHEET_COL_START =   3
+SHEET_ROW_START =   4

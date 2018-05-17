@@ -32,6 +32,9 @@ def calculate_fitness(individual):
 
     if FIT_SPEAKER_OCC:
         scores.append(score_speaker_occupation(individual))
+        
+    if FIT_SESSIONS:
+        scores.append(score_sessions(individual))
 
     return mean(scores)
 
@@ -77,8 +80,17 @@ def score_room_occupation(individual):
 """
 """
 def score_sessions(individual):
-    pass
-    #for room_i in range(NUMBER_OF_ROOMS):
+    room_talks = []
+
+    """
+        Each element of room_talk list is a list of talks had on a specific room and day.
+    """
+    for room_i in range(NUMBER_OF_ROOMS):
+        for day_i in range(3):
+            room_talk = [talk for talk in individual if talk['room'] == room_i + 1 and talk['day'] == day_i + 1]
+            room_talks.append(room_talk)
+            
+    return 100
     
 
 
@@ -99,3 +111,6 @@ def get_worst_fit_pos(pop_scores):
     return scores.index(min(scores))
 
 
+'''
+    Speakers requeridos ao mesmo tempo
+'''
