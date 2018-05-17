@@ -22,7 +22,7 @@ def main():
     population = init_population(papers)
 
     for gen_no in range(GENERATIONS):
-        # export_to_spreadsheet(wb_path, population)
+        export_to_spreadsheet('results.xlsx', population[0])
         print(f'-----Handling generation #{gen_no + 1}-----\n')
         population = manage_generation(population)
         input('')
