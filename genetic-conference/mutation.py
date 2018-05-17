@@ -30,13 +30,16 @@ def mutate_population(population):
 
     for i in range(len(population)):
         if uniform(0,1) < MUTATION: 
+            '''
             print("\n-----MUTATION-----") 
             print("BEFORE MUTATION")
-            print_conference(population[i])  
+            print_conference(population[i])
+            ''' 
             population[i] = mutate_conference(population[i])
+            '''
             print("AFTER MUTATION")
             print_conference(population[i])
-            
+            '''
     return population
 
 

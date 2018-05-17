@@ -25,7 +25,7 @@ def main():
 
     for gen_no in range(GENERATIONS):
         # export_to_spreadsheet(wb_path, population)
-        input('')
+        #input('')
         print(f'-----Handling generation #{gen_no + 1}-----\n')
         population = manage_generation(population)
 
@@ -33,8 +33,16 @@ def main():
 """
 """
 def manage_generation(population):
+    
     # Evaluate each individual from the population.
     scores = calculate_pop_fitness(population)
+    fittest = get_most_fit(scores)
+
+    for score in scores:
+        if score[1] >= DESIRED_FITNESS:
+            print("Found a pretty sweet scheduling...")
+            print_conference(score[0])
+            input('')
 
     # Crossover selection.
     roulette = generate_roulette(scores)
@@ -45,6 +53,9 @@ def manage_generation(population):
 
     # Mutate resulting children.
     zombies = mutate_population(children)
+
+    # Elitism - replace the worst child of gen N by the best of gen N-1
+    zombies = elitism_policy(zombies, fittest)
 
     # Return new generation.
     return zombies
@@ -93,17 +104,7 @@ def init_population(papers):
     return population
 
 
-"""
-    Computes the fitness score of this generation's population.
-    Returns a list of pairs which map the individual and its score.
-"""
-def calculate_pop_fitness(population):
-    scores = []
 
-    for individual in population:
-        scores.append((individual, calculate_fitness(individual)))
-
-    return scores
 
 
 main()
