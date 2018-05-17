@@ -32,10 +32,11 @@ def spin_roulette(roulette, population):
         spin_1, spin_2 = uniform(0.0, 1.0), uniform(0.0, 1.0)
         return (find_slice(spin_1), find_slice(spin_2))
 
-    for _ in range(len(roulette)):
+    for _ in range(NUMBER_OF_CROMOSSOMES//2):
         relations.append(make_slice_pair())
 
     return relations
+
 
 
 """
@@ -45,13 +46,25 @@ def spin_roulette(roulette, population):
 """
 def xover_parents(mother, father):
     print("\n------CROSSOVER------\n")
-    print("Mother")
-    for presentation in mother: print(presentation)
 
-    print("\nFather")
-    for presentation in father: print(presentation)
+    child1 , child2 = [] , []
 
-    return mother
+
+    for presentation1, presentation2 in zip(mother, father):
+        if randint(0,1) != 0:
+            child1.append(presentation1)
+            child2.append(presentation2)
+        else:
+            child1.append(presentation2)
+            child2.append(presentation1)
+
+    print("---Children---")
+    print("Child1")
+    print_conference(child1)
+    print("Child2")
+    print_conference(child2)
+    
+    return [child1,child2]
 
 
 """
@@ -62,8 +75,13 @@ def xover_population(couples):
     children = []
 
     for couple in couples: 
-        child = xover_parents(couple[0], couple[1])
-        children.append(child)
+        print("\n\n-------Couple---------")
+        for parent in couple:
+            print("One parent")
+            print_conference(parent)
+        
+        childs = xover_parents(couple[0], couple[1])
+        children.extend(childs)
 
     return children
 
@@ -73,3 +91,9 @@ def xover_population(couples):
 """
 def mutate_population(population):
     return population
+
+
+
+def print_conference(conference):
+    for presentation in conference:
+        print(presentation)
