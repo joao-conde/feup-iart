@@ -14,3 +14,7 @@ LUNCH_START =       21
 LUNCH_END =         30
 COFFEE_2_START =    48
 COFFEE_2_END =      51
+
+# Fitness parameters
+FIT_COLLISIONS =    True
+FIT_ROOM_OCC =      True
