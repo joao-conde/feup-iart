@@ -1,52 +1,64 @@
-from intervals import IntInterval
+from intervals import *
 from macros import *
+from statistics import stdev, mean
 import itertools
 
 """
-    Applies a number of tests to a provided individual and returns an average of scores.
+    Applies a number of tests to a provided individual and returns an average of calculated scores.
 """
 def calculate_fitness(individual):
-    return score_collisions(individual)
+    scores = []
+
+    if FIT_COLLISIONS: 
+        scores.append(score_collisions(individual))
+
+    if FIT_ROOM_OCC:
+        scores.append(score_room_occupation(individual))
+
+    return mean(scores)
 
 
 """
     Scores an individual, based on the number of conflicting talks.
     The grading system follows the formula: 100 - 100/TalkNo * CollisionNo.
     TODO: For now, it's considering collisions even it is in separate rooms.
+    TODO: Also, it's only considering inner collisions, when it should detect edge.
 """
 def score_collisions(individual):
 
     # Receives a talk dictionary entry and returns the interval of time allocated to that resource.
     def construct_interval(talk):
-        return IntInterval([talk.get('time'), talk.get('time') + talk.get('paper').duration // 10])
+        return Interval([talk.get('time'), talk.get('time') + talk.get('paper').duration // 10])
 
     intervals, conflicts = [construct_interval(talk) for talk in individual], 0
-    breaks = [IntInterval([COFFEE_1_START, COFFEE_1_END]), IntInterval([LUNCH_START, LUNCH_END]), IntInterval([COFFEE_2_START, COFFEE_2_END])]
+    breaks = [Interval([COFFEE_1_START, COFFEE_1_END]), Interval([LUNCH_START, LUNCH_END]), Interval([COFFEE_2_START, COFFEE_2_END])]
 
     # Counts the number of paper-paper conflicts.
     for ia, ib in itertools.combinations(intervals, 2):
-        if ia in ib: conflicts += 1
+        if (ia in ib) : conflicts += 1
 
     # Counts the number of paper-break conflicts.
-    break_conf = len([inter for inter in intervals if any((inter in x) for x in breaks)])
-    print(break_conf)
+    conflicts += len([inter for inter in intervals if any((inter in x) for x in breaks)])
         
-        
-
     return 100 - 100 // len(individual) * conflicts  # Calculate fitness score.
 
 
 """
+    Scores an individual, based on the balance of room occupation.
+    TODO: Variance calculation isn't perfectly fine.
 """
-def score_overlapping_breaks(individual):
+def score_room_occupation(individual):
+    rooms, counts = [talk.get('room') for talk in individual], []
+
+    for room_i in range(NUMBER_OF_ROOMS):
+        counts.append(rooms.count(room_i))
+
+    return 100 - stdev(counts) / len(individual) * 100
+
+
+"""
+"""
+def score_sessions(individual):
     pass
-
+    #for room_i in range(NUMBER_OF_ROOMS):
     
-
-
-
-
-
-
-    
-
