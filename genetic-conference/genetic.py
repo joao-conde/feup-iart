@@ -23,8 +23,9 @@ def main():
 
     for gen_no in range(GENERATIONS):
         # export_to_spreadsheet(wb_path, population)
-        print(f'Handling generation #{gen_no + 1}...\n')
+        print(f'-----Handling generation #{gen_no + 1}-----\n')
         population = manage_generation(population)
+        input('')
 
 
 """
