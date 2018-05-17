@@ -43,6 +43,3 @@ def mutate_population(population):
     return population
 
 
-def print_conference(conference):
-    for presentation in conference:
-        print(presentation)

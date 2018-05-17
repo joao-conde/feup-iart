@@ -82,8 +82,3 @@ def elitism_policy(children, best_child):
     children[get_worst_fit_pos(scores)] = best_child
     return children
     
-
-
-def print_conference(conference):
-    for presentation in conference:
-        print(presentation)

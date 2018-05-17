@@ -1,8 +1,8 @@
 # Genetic constants
-GENERATIONS = 1000
+GENERATIONS = 2000
 NUMBER_OF_CROMOSSOMES = 6
 MUTATION = 0.01
-DESIRED_FITNESS = 90
+DESIRED_FITNESS = 85
 
 # Conference limitations
 NUMBER_OF_ROOMS =   3
@@ -19,3 +19,4 @@ COFFEE_2_END =      51
 # Fitness parameters
 FIT_COLLISIONS =    True
 FIT_ROOM_OCC =      True
+FIT_SPEAKER_OCC =   True

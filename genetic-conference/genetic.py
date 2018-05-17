@@ -1,6 +1,6 @@
 import re
 from morph import flatten
-from conference import *
+from paper import *
 from random import *
 from macros import *
 from fitness import *
@@ -8,12 +8,14 @@ from crossover import *
 from mutation import *
 from utilities import *
 
+import time
+
 
 """
     Genetic Algorithm based scheduler application entry point.
 """
 def main():
-    print('\n⏳  Genetic Conference Scheduler (v1.0)')
+    print('\n⏳  Genetic Conference Scheduler (v3.4)')
     
     # Initialize population.
     #papers = parse_paper_file(input('Paper file path: '))
@@ -33,16 +35,20 @@ def main():
 """
 """
 def manage_generation(population):
-    
+
     # Evaluate each individual from the population.
     scores = calculate_pop_fitness(population)
     fittest = get_most_fit(scores)
 
+    print("ELITE:", calculate_fitness(fittest))
+    print_conference(fittest)
+
     for score in scores:
         if score[1] >= DESIRED_FITNESS:
-            print("Found a pretty sweet scheduling...")
-            print_conference(score[0])
-            input('')
+            print("\nFound a pretty sweet scheduling ( FITNESS >=", DESIRED_FITNESS, ")\n")
+            print_conference(score[0], score[1])
+            #input('')
+            #time.sleep(2)
 
     # Crossover selection.
     roulette = generate_roulette(scores)
@@ -86,16 +92,18 @@ def init_population(papers):
     population = []
 
     """
-        Generates a semi-random individual in its binary representation.
+        Generates a semi-random individual.
         The genotype is composed of a dictionary containing a pointer for the paper object, talk's room, day
         and starting ten minute block for it.
     """
     def init_conference(papers):
         conference = []
         
+        
         for paper in papers:
             gen_room, gen_day, gen_block = randint(1, NUMBER_OF_ROOMS), randint(1, 3), randint(0, MAX_START_BLOCK)
             conference.append({'paper': paper, 'room': gen_room, 'day': gen_day, 'time': gen_block})
+            
         return conference
 
     for _ in range(NUMBER_OF_CROMOSSOMES):
@@ -105,6 +113,5 @@ def init_population(papers):
 
 
 
-
-
+#program entry point
 main()
