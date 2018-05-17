@@ -86,11 +86,8 @@ def xover_population(couples):
     return children
 
 
-"""
-    TODO: Implement mutation & documentate.
-"""
-def mutate_population(population):
-    return population
+
+
 
 
 

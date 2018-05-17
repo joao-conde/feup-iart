@@ -29,10 +29,8 @@ def score_collisions(individual):
 
     # Counts the number of paper-break conflicts.
     break_conf = len([inter for inter in intervals if any((inter in x) for x in breaks)])
-    print(break_conf)
+    #print(break_conf)
         
-        
-
     return 100 - 100 // len(individual) * conflicts  # Calculate fitness score.
 
 

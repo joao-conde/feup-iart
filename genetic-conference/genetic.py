@@ -5,7 +5,9 @@ from random import *
 from macros import *
 from fitness import *
 from crossover import *
+from mutation import *
 from utilities import *
+
 
 """
     Genetic Algorithm based scheduler application entry point.
@@ -23,9 +25,9 @@ def main():
 
     for gen_no in range(GENERATIONS):
         # export_to_spreadsheet(wb_path, population)
+        input('')
         print(f'-----Handling generation #{gen_no + 1}-----\n')
         population = manage_generation(population)
-        input('')
 
 
 """

@@ -1,6 +1,7 @@
 # Genetic constants
-GENERATIONS = 2
+GENERATIONS = 100
 NUMBER_OF_CROMOSSOMES = 6
+MUTATION = 1
 
 # Conference limitations
 NUMBER_OF_ROOMS =   3
