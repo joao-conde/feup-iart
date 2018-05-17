@@ -1,17 +1,15 @@
 # Genetic constants
-GENERATIONS = 1
+GENERATIONS =           1
 NUMBER_OF_CROMOSSOMES = 6
 
-# Input constants
-NUMBER_OF_PAPERS = 3
-
 # Conference limitations
-NUMBER_OF_ROOMS = 3
-MAX_START_BLOCK = 64
+NUMBER_OF_ROOMS =   3
+MAX_START_BLOCK =   64
 
-# Attribute bit encoding
-ID_BIT_ENCODING = 6
-ROOM_BIT_ENCODING = 4
-DAY_BIT_ENCODING = 2
-BLOCK_BIT_ENCODING = 7
-FULL_ENCODING_SIZE = 19
+# Break Scheduling
+COFFEE_1_START =    6
+COFFEE_1_END =      9
+LUNCH_START =       21
+LUNCH_END =         30
+COFFEE_2_START =    48
+COFFEE_2_END =      51
