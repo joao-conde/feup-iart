@@ -1,3 +1,7 @@
 Understanding Neural Networks | Minsky | AI, Machine Learning | 30
 Cracking GO by Scratch | Minsky | Machine Learning | 20
-Predicting an Heart Attack | Norvig | AI, Medicine | 30 
+Predicting an Heart Attack | Norvig | AI, Medicine | 30
+Advanced Distributed Systems | Souto | SDIS, IT | 30
+SDIS 101: quick tips | Souto | SDIS, IT | 20
+Entropy in ID3 algorithm | HLC | IART, IT | 30
+Im a superhero, by Firmino | Firmino | PPIN, Bugigangas | 30 

@@ -44,8 +44,12 @@ def spin_roulette(roulette, population):
     Returns the resulting child.
 """
 def xover_parents(mother, father):
-    print("Mother: ", mother)
-    print("Father: ", father, "\n")
+    print("\n------CROSSOVER------\n")
+    print("Mother")
+    for presentation in mother: print(presentation)
+
+    print("\nFather")
+    for presentation in father: print(presentation)
 
     return mother
 

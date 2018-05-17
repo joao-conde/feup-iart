@@ -14,9 +14,11 @@ def main():
     print('\n⏳  Genetic Conference Scheduler (v1.0)')
     
     # Initialize population.
-    papers = parse_paper_file(input('Paper file path: '))
-    wb_path = input('Spreadsheet path: ')
-
+    #papers = parse_paper_file(input('Paper file path: '))
+    papers = parse_paper_file("papers.txt")
+    
+    #wb_path = input('Spreadsheet path: ')
+    
     population = init_population(papers)
 
     for gen_no in range(GENERATIONS):
