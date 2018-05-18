@@ -1,4 +1,5 @@
 import re
+import copy
 from morph import flatten
 from paper import *
 from random import *
@@ -10,6 +11,7 @@ from utilities import *
 
 import time
 
+#logger = open('logger.txt', 'w+')
 
 """
     Genetic Algorithm based scheduler application entry point.
@@ -36,34 +38,37 @@ def manage_generation(population):
 
     # Evaluate each individual from the population.
     scores = calculate_pop_fitness(population)
-    fittest = get_most_fit(scores)
+    max_score = max(scores)
+    fittest = copy.deepcopy(population[scores.index(max_score)])
 
-    print("ELITE:", calculate_fitness(fittest))
-    print_conference(fittest)
+    print(f"\n\nELITE:{max_score}\n\n")
+    #print_conference(fittest)
+    #logger.write(str(max_score) + "\n")
 
-    for score in scores:
-        if score[1] >= DESIRED_FITNESS:
-            #print("\nFound a pretty sweet scheduling ( FITNESS >=", DESIRED_FITNESS, ")\n")
-            print_conference(score[0])
-            export_to_spreadsheet('results.xlsx', score[0])
+    for i, score in enumerate(scores):
+        if score >= DESIRED_FITNESS:
+            #print_conference(population[i])
+            export_to_spreadsheet('results.xlsx', population[i])
             #input('')
             #time.sleep(2)
+            pass
 
     # Crossover selection.
-    roulette = generate_roulette(scores)
+    roulette = generate_roulette(population, scores)
     couples = spin_roulette(roulette, population)
 
     # Crossover initialization.
     children = xover_population(couples)
 
     # Mutate resulting children.
-    zombies = mutate_population(children)
+    zombies_tuple = mutate_population(children, scores)
+    zombies, scores = zombies_tuple[0], zombies_tuple[1]
 
     # Elitism - replace the worst child of gen N by the best of gen N-1
-    zombies = elitism_policy(zombies, fittest)
+    population = elitism_policy(zombies, scores, fittest)
 
     # Return new generation.
-    return zombies
+    return population
 
 
 """
