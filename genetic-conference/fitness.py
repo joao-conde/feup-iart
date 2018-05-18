@@ -3,6 +3,7 @@ from macros import *
 from statistics import stdev, mean
 from utilities import *
 import itertools
+import time
 
 
 
@@ -37,9 +38,7 @@ def calculate_fitness(individual):
     if FIT_SESSIONS:
         scores.append(score_sessions(individual))
 
-    mean2 = mean(scores)
-    print(mean2)
-    return mean2
+    return mean(scores)
 
 
 # Receives a talk dictionary entry and returns the interval of time allocated to that resource.
@@ -51,7 +50,7 @@ def construct_interval(talk):
     The grading system follows the formula: 100 - 100/TalkNo * CollisionNo.
 """
 def score_collisions(individual):
-    conflicts = 0
+    conflicts, wild = 0, [construct_interval(talk) for talk in individual]
     breaks = [Interval([COFFEE_1_START, COFFEE_1_END]), Interval([LUNCH_START, LUNCH_END]), Interval([COFFEE_2_START, COFFEE_2_END])]
 
     # Generates a list of organized intervals.
@@ -70,7 +69,7 @@ def score_collisions(individual):
     conflicts += sum([count_paper_collisions(sit) for sit in i_talks])
 
     # Counts the number of paper-break conflicts.
-    conflicts += len([inter for inter in intervals if any((inter in x) for x in breaks)])
+    conflicts += len([inter for inter in wild if any((inter in x) for x in breaks)])
         
     return 100 - 100 / len(individual) * conflicts  # Calculate fitness score.
 
@@ -83,8 +82,10 @@ def count_paper_collisions(intervals):
     for ia, ib in itertools.combinations(intervals, 2):
         if ((ia < ib and (ia.upper > ib.lower or ib.lower < ia.upper)) or 
             (ia > ib and (ib.upper > ia.lower or ia.lower < ib.upper)) or
-            (ia in ib) or (ib in ia) or (ia == ib)): conflicts += 1
-
+            (ia in ib) or (ib in ia) or (ia == ib)): 
+            
+            conflicts += 1
+            
     return conflicts
 
 

@@ -10,16 +10,16 @@ MAX_START_BLOCK =   57
 
 # Break Scheduling
 COFFEE_1_START =    6
-COFFEE_1_END =      9
+COFFEE_1_END =      8
 LUNCH_START =       21
-LUNCH_END =         30
+LUNCH_END =         29
 COFFEE_2_START =    48
-COFFEE_2_END =      51
+COFFEE_2_END =      50
 
 # Fitness parameters
 FIT_COLLISIONS =    True
 FIT_ROOM_OCC =      False
-FIT_SPEAKER_OCC =   True
+FIT_SPEAKER_OCC =   False
 FIT_SESSIONS =      False
 
 # Spreadsheet parameters
