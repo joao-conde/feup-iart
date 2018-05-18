@@ -1,5 +1,6 @@
 from random import *
 from macros import *
+from fitness import calculate_fitness
 
 
 def mutate_room(conference):
@@ -26,20 +27,12 @@ def mutate_conference(conference):
 """
     
 """
-def mutate_population(population):
-
+def mutate_population(population, scores):
     for i in range(len(population)):
         if uniform(0,1) < MUTATION: 
-            '''
-            print("\n-----MUTATION-----") 
-            print("BEFORE MUTATION")
-            print_conference(population[i])
-            ''' 
             population[i] = mutate_conference(population[i])
-            '''
-            print("AFTER MUTATION")
-            print_conference(population[i])
-            '''
-    return population
+            scores[i] = calculate_fitness(population[i])
+
+    return (population, scores)
 
 

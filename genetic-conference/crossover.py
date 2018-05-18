@@ -7,13 +7,13 @@ from fitness import get_worst_fit_pos, calculate_pop_fitness
     This approach is based on the Fitness Proportionate Selection genetic operator.
     Returns a list of individual object and roulette slice pairs.
 """
-def generate_roulette(scores):
+def generate_roulette(population, scores):
     roulette, prob = [], 0.0
-    fit_sum = sum([score[1] for score in scores])
+    fit_sum = sum(scores)
 
-    for score in scores:
-        prob = prob + (score[1] / fit_sum)
-        roulette.append((score, prob))
+    for i, score in enumerate(scores):
+        prob += (score / fit_sum)
+        roulette.append((population[i], prob))
 
     return roulette
 
@@ -27,13 +27,13 @@ def spin_roulette(roulette, population):
 
     def find_slice(spin):
         for i, _ in enumerate(roulette):
-            if spin < roulette[i][1]: return roulette[i][0][0]
+            if spin < roulette[i][1]: return roulette[i][0]
 
     def make_slice_pair():
         spin_1, spin_2 = uniform(0.0, 1.0), uniform(0.0, 1.0)
         return (find_slice(spin_1), find_slice(spin_2))
 
-    for _ in range(NUMBER_OF_CROMOSSOMES//2):
+    for _ in range(NUMBER_OF_CROMOSSOMES // 2):
         relations.append(make_slice_pair())
 
     return relations
@@ -47,7 +47,6 @@ def spin_roulette(roulette, population):
 """
 def xover_parents(mother, father):
     #print("\n------CROSSOVER------\n")
-
     child1 , child2 = [] , []
 
     for presentation1, presentation2 in zip(mother, father):
@@ -76,8 +75,7 @@ def xover_population(couples):
 
 
 
-def elitism_policy(children, best_child):
-    scores = calculate_pop_fitness(children)
-    children[get_worst_fit_pos(scores)] = best_child
+def elitism_policy(children, scores, fittest):
+    children[scores.index(min(scores))] = fittest
     return children
     

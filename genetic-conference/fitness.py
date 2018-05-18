@@ -14,7 +14,7 @@ def calculate_pop_fitness(population):
     scores = []
 
     for individual in population:
-        scores.append((individual, calculate_fitness(individual)))
+        scores.append(calculate_fitness(individual))
 
     return scores
 
@@ -37,9 +37,9 @@ def calculate_fitness(individual):
     if FIT_SESSIONS:
         scores.append(score_sessions(individual))
 
-    print(scores)
-
-    return mean(scores)
+    mean2 = mean(scores)
+    print(mean2)
+    return mean2
 
 
 # Receives a talk dictionary entry and returns the interval of time allocated to that resource.
@@ -72,7 +72,7 @@ def score_collisions(individual):
     # Counts the number of paper-break conflicts.
     conflicts += len([inter for inter in intervals if any((inter in x) for x in breaks)])
         
-    return 100 - 100 // len(individual) * conflicts  # Calculate fitness score.
+    return 100 - 100 / len(individual) * conflicts  # Calculate fitness score.
 
 
 """
@@ -130,6 +130,7 @@ def score_speaker_occupation(individual):
     collisions += score_collisions_speaker(day2)
     collisions += score_collisions_speaker(day3)
 
+    #return 100 - 100 // len(individual) * conflicts  # Calculate fitness score.
     return 100 - collisions / len(individual) * 100
 
 '''
@@ -149,10 +150,6 @@ def score_collisions_speaker(day_talks):
     return collisions
 
 
-
-def get_most_fit(pop_scores):
-    scores = [el[1] for el in pop_scores]
-    return pop_scores[scores.index(max(scores))][0]
 
 def get_worst_fit_pos(pop_scores):
     scores = [el[1] for el in pop_scores]
