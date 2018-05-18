@@ -45,7 +45,7 @@ def manage_generation(population):
         if score[1] >= DESIRED_FITNESS:
             print("\nFound a pretty sweet scheduling ( FITNESS >=", DESIRED_FITNESS, ")\n")
             print_conference(score[0], score[1])
-            export_to_spreadsheet('results.xlsx', score[0])
+            #export_to_spreadsheet('results.xlsx', score[0])
             input('')
             #time.sleep(2)
 
