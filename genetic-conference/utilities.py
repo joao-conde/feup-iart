@@ -27,7 +27,8 @@ def export_to_spreadsheet(wb_path, individual):
         c = SHEET_COL_START + (talk['day'] - 1) * (NUMBER_OF_ROOMS + 1) + (talk['room'] - 1)
         r = SHEET_ROW_START + talk['time']
 
-        ws.cell(row=r , column=c , value=talk['paper'].id)
+        for dur in range(talk['paper'].duration // 10):
+            ws.cell(row=r + dur, column=c, value=talk['paper'].id)
 
     wb.save('results.xlsx')
 
