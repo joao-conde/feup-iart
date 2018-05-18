@@ -38,7 +38,7 @@ def calculate_fitness(individual):
         scores.append(score_sessions(individual))
 
     mean2 = mean(scores)
-    print(mean2)
+    #print(mean2)
     return mean2
 
 

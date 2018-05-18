@@ -17,6 +17,8 @@ import time
     Genetic Algorithm based scheduler application entry point.
 """
 def main():
+    #initialize random seed 
+    seed(time.time())
     print('\n⏳  Genetic Conference Scheduler (v3.4)')
     
     # Initialize population.
@@ -26,7 +28,6 @@ def main():
     #wb_path = input('Spreadsheet path: ')
     
     population = init_population(papers)
-
     for gen_no in range(GENERATIONS):
         print(f'-----Handling generation #{gen_no + 1}-----\n')
         population = manage_generation(population)
@@ -105,7 +106,7 @@ def init_population(papers):
         
         
         for paper in papers:
-            gen_room, gen_day, gen_block = randint(1, NUMBER_OF_ROOMS), randint(1, 3), randint(0, MAX_START_BLOCK)
+            gen_room, gen_day, gen_block = randint(1, NUMBER_OF_ROOMS), randint(1, 3), generate_except(0, MAX_START_BLOCK, INVALID_BLOCKS)
             conference.append({'paper': paper, 'room': gen_room, 'day': gen_day, 'time': gen_block})
             
         return conference

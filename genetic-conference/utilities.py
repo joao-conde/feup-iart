@@ -1,4 +1,5 @@
 from macros import *
+from random import *
 import openpyxl as sheets
 
 
@@ -40,3 +41,14 @@ def print_conference(conference, fitness = -1):
     
     for presentation in conference:
         print(presentation['paper'], " --> room:", presentation['room'], "; day:", presentation['day'], "; time:", presentation['time'])
+
+
+def generate_except(lb, up, invalid):
+    gen = randint(lb,up)
+    
+    while gen in invalid:
+        gen = randint(lb, up)
+
+    return gen
+
+    
