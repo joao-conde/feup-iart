@@ -76,7 +76,7 @@ def count_paper_collisions(intervals):
         if ((ia < ib and (ia.upper > ib.lower or ib.lower < ia.upper)) or 
             (ia > ib and (ib.upper > ia.lower or ia.lower < ib.upper)) or
             (ia in ib) or (ib in ia) or (ia == ib)): 
-                print(ia, ib)
+                #print(ia, ib)
                 conflicts += 1
 
     return conflicts
@@ -124,6 +124,8 @@ def score_speaker_occupation(individual):
     collisions += score_collisions_speaker(day2)
     collisions += score_collisions_speaker(day3)
 
+    print("FOUND", collisions, "collisions\n")
+
     return 100 - collisions / len(individual) * 100
 
 
@@ -134,14 +136,12 @@ def score_collisions_speaker(day_talks):
     for speaker in daily_speakers:
         sp_talks = [talk for talk in day_talks if talk['paper'].speaker == speaker]
 
-        for talk in sp_talks:
-            collisions += count_collisions(construct_interval(talk))
-
+        intervals = [construct_interval(talk) for talk in sp_talks]
+    
+        collisions += count_paper_collisions(intervals)
+    
     return collisions
 
-
-def count_collisions(intervals):
-    return 0
 
 
 def get_most_fit(pop_scores):
