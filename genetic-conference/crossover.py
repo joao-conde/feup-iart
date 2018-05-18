@@ -50,7 +50,6 @@ def xover_parents(mother, father):
 
     child1 , child2 = [] , []
 
-
     for presentation1, presentation2 in zip(mother, father):
         if randint(0,1) != 0:
             child1.append(presentation1)
