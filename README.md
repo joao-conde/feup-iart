@@ -11,3 +11,13 @@ Pretende-se montar o programa da conferência, procurando garantir sessões equi
 O trabalho consiste em aplicar metodologias de otimização (Algoritmos Genéticos é uma delas) a este cenário, resolvendo instâncias de dimensões consideráveis. Estas metodologias podem ser utilizadas para efectuar uma análise comparativa do nível de desempenho de cada uma.
 
 
+
+##NOTAS
+
+Assume-se que:
+
+	- os dois coffee breaks são das 11h às 11h30 e das 17h00 às 17h30, respetivamente
+	- o almoço do 12h30 às 14h00
+	- existem duas sessões temáticas de 2h cada:
+		- a da manhã, das 9h00 às 11h00
+		- a da tarde, das 14h00 às 16h00
