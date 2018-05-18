@@ -5,7 +5,7 @@ MUTATION = 0.01
 DESIRED_FITNESS = 85
 
 # Conference limitations
-NUMBER_OF_ROOMS =   3
+NUMBER_OF_ROOMS =   4
 MAX_START_BLOCK =   57
 
 # Break Scheduling
@@ -18,9 +18,9 @@ COFFEE_2_END =      51
 
 # Fitness parameters
 FIT_COLLISIONS =    True
-FIT_ROOM_OCC =      True
-FIT_SPEAKER_OCC =   True
-FIT_SESSIONS =      True
+FIT_ROOM_OCC =      False
+FIT_SPEAKER_OCC =   False
+FIT_SESSIONS =      False
 
 # Spreadsheet parameters
 SHEET_COL_START =   3

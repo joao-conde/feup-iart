@@ -26,7 +26,6 @@ def main():
     population = init_population(papers)
 
     for gen_no in range(GENERATIONS):
-        export_to_spreadsheet('results.xlsx', population[0])
         print(f'-----Handling generation #{gen_no + 1}-----\n')
         population = manage_generation(population)
 
@@ -46,7 +45,8 @@ def manage_generation(population):
         if score[1] >= DESIRED_FITNESS:
             print("\nFound a pretty sweet scheduling ( FITNESS >=", DESIRED_FITNESS, ")\n")
             print_conference(score[0], score[1])
-            #input('')
+            export_to_spreadsheet('results.xlsx', score[0])
+            input('')
             #time.sleep(2)
 
     # Crossover selection.
