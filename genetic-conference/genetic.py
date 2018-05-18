@@ -19,7 +19,7 @@ def main():
     
     # Initialize population.
     #papers = parse_paper_file(input('Paper file path: '))
-    papers = parse_paper_file("papers.txt")
+    papers = parse_paper_file("papers_mock.txt")
     
     #wb_path = input('Spreadsheet path: ')
     
@@ -38,15 +38,15 @@ def manage_generation(population):
     scores = calculate_pop_fitness(population)
     fittest = get_most_fit(scores)
 
-    #print("ELITE:", calculate_fitness(fittest))
-    #print_conference(fittest)
+    print("ELITE:", calculate_fitness(fittest))
+    print_conference(fittest)
 
     for score in scores:
         if score[1] >= DESIRED_FITNESS:
             #print("\nFound a pretty sweet scheduling ( FITNESS >=", DESIRED_FITNESS, ")\n")
             print_conference(score[0])
             export_to_spreadsheet('results.xlsx', score[0])
-            input('')
+            #input('')
             #time.sleep(2)
 
     # Crossover selection.
