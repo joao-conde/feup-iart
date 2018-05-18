@@ -9,7 +9,7 @@ import time
 
 """
     Computes the fitness score of this generation's population.
-    Returns a list of pairs which map the individual and its score.
+    Returns a list of individual's score.
 """
 def calculate_pop_fitness(population):
     scores = []
@@ -26,20 +26,22 @@ def calculate_pop_fitness(population):
 def calculate_fitness(individual):
     scores = []
 
-    if FIT_COLLISIONS: 
-        scores.append(score_collisions(individual))
+    if FIT_SCHEDULE_COLLISIONS: 
+        scores.append(WEIGHT_SCHEDULE_COLL * score_collisions(individual))
+
+    if FIT_BREAK_COLLISIONS:
+        scores.append(WEIGHT_BREAK_COLL * score_break_collisions(individual))
 
     if FIT_ROOM_OCC:
         scores.append(score_room_occupation(individual))
 
     if FIT_SPEAKER_OCC:
-        scores.append(score_speaker_occupation(individual))
+        scores.append(WEIGHT_SPEAKER_COLL * score_speaker_occupation(individual))
         
-    if FIT_SESSIONS:
-        scores.append(score_sessions(individual))
+    if FIT_SESSIONS_THEME:
+        scores.append(WEIGHT_SESSION_THEME * score_sessions_theme(individual))
 
-    return mean(scores)
-
+    return (1 - sum(scores)) * 100
 
 # Receives a talk dictionary entry and returns the interval of time allocated to that resource.
 def construct_interval(talk):
@@ -50,7 +52,7 @@ def construct_interval(talk):
     The grading system follows the formula: 100 - 100/TalkNo * CollisionNo.
 """
 def score_collisions(individual):
-    conflicts, wild = 0, [construct_interval(talk) for talk in individual]
+    conflicts = 0
     breaks = [Interval([COFFEE_1_START, COFFEE_1_END]), Interval([LUNCH_START, LUNCH_END]), Interval([COFFEE_2_START, COFFEE_2_END])]
 
     # Generates a list of organized intervals.
@@ -67,12 +69,8 @@ def score_collisions(individual):
         
     # Counts the number of paper-paper conflicts.
     conflicts += sum([count_paper_collisions(sit) for sit in i_talks])
-
-    # Counts the number of paper-break conflicts.
-    conflicts += len([inter for inter in wild if any((inter in x) for x in breaks)])
         
-    return 100 - 100 / len(individual) * conflicts  # Calculate fitness score.
-
+    return conflicts/len(individual)
 
 """
 """
@@ -102,17 +100,34 @@ def score_room_occupation(individual):
     return 100 - stdev(counts) / len(individual) * 100
 
 
-"""
-"""
-def score_sessions(individual):
-    room_talks = []
+def score_break_collisions(individual):
+    violations = [talk['paper'].id for talk in individual if talk['time'] in INVALID_BLOCKS or talk['time']+talk['paper'].duration//BLOCK_TIME in INVALID_BLOCKS]
+    return len(violations)/len(individual)
 
-    for day_i in range(3):
-        for room_i in range(NUMBER_OF_ROOMS):
-            room_talk = [talk for talk in individual if talk['room'] == room_i + 1 and talk['day'] == day_i + 1]
-            room_talks.append(room_talk)
 
-    return 100
+"""
+    Penalizes sessions with a wide variety of different themes
+"""
+def score_sessions_theme(individual):
+
+    diversity = 0
+
+    for room_i in range(NUMBER_OF_ROOMS):
+        room_i_morning_session_themes_list= [talk['paper'].themes for talk in individual if talk['room'] == room_i+1 and talk['time'] >= MORNING_SESSION_START and talk['time'] <= MORNING_SESSION_END]
+        themes = []
+        for theme_list in room_i_morning_session_themes_list: themes.extend(theme_list)
+        theme_set = set(themes)
+        
+        if len(theme_set) != 1: diversity += len(theme_set)
+        
+        themes = []
+        room_i_afternoon_session_themes_list= [talk['paper'].themes for talk in individual if talk['room'] == room_i+1 and talk['time'] >= AFTERNOON_SESSION_START and talk['time'] <= AFTERNOON_SESSION_END]
+        for theme_list in room_i_afternoon_session_themes_list: themes.extend(theme_list)
+        theme_set = set(themes)
+        
+        if len(theme_set) != 1: diversity += len(theme_set)
+        
+    return diversity/len(individual)
     
 
 
@@ -131,8 +146,7 @@ def score_speaker_occupation(individual):
     collisions += score_collisions_speaker(day2)
     collisions += score_collisions_speaker(day3)
 
-    #return 100 - 100 // len(individual) * conflicts  # Calculate fitness score.
-    return 100 - collisions / len(individual) * 100
+    return collisions/len(individual)
 
 '''
     Speaker required in 2 or more rooms in the same time
@@ -151,9 +165,5 @@ def score_collisions_speaker(day_talks):
     return collisions
 
 
-
-def get_worst_fit_pos(pop_scores):
-    scores = [el[1] for el in pop_scores]
-    return scores.index(min(scores))
 
 

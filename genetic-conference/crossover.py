@@ -1,6 +1,6 @@
 from random import *
 from macros import *
-from fitness import get_worst_fit_pos, calculate_pop_fitness
+from fitness import calculate_pop_fitness
 
 """
     Generate a roulette wheel based on the fitness score of the individuals.

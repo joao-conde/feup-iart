@@ -1,5 +1,8 @@
 import re
 import copy
+import signal
+import sys
+
 from morph import flatten
 from paper import *
 from random import *
@@ -17,9 +20,9 @@ import time
     Genetic Algorithm based scheduler application entry point.
 """
 def main():
-    #initialize random seed 
+
     seed(time.time())
-    print('\n⏳  Genetic Conference Scheduler (v3.4)')
+    print('\n⏳  Genetic Conference Scheduler (v5.4)')
     
     # Initialize population.
     #papers = parse_paper_file(input('Paper file path: '))
@@ -43,16 +46,20 @@ def manage_generation(population):
     fittest = copy.deepcopy(population[scores.index(max_score)])
 
     print(f"\n\nELITE:{max_score}\n\n")
+    export_to_spreadsheet('results.xlsx', fittest)
+    if max_score == DESIRED_FITNESS : return
+
     #print_conference(fittest)
     #logger.write(str(max_score) + "\n")
 
     for i, score in enumerate(scores):
         if score >= DESIRED_FITNESS:
             #print_conference(population[i])
-            export_to_spreadsheet('results.xlsx', population[i])
+            #export_to_spreadsheet('results.xlsx', population[i])
             #input('')
             #time.sleep(2)
             pass
+            
 
     # Crossover selection.
     roulette = generate_roulette(population, scores)
@@ -117,6 +124,15 @@ def init_population(papers):
     return population
 
 
+'''
+def signal_handler(signal, frame):
+    print_conference(fittest)
+    export_to_spreadsheet("results.xlsx", fittest)
+    print("\nSAVED BEST SCHEDULING TO EXCEL SHEET")
+    sys.exit(0)
 
+
+signal.signal(signal.SIGINT, signal_handler)
+'''
 #program entry point
 main()

@@ -23,28 +23,3 @@ Antony | Fox | Machine Learning | 30
 Noll | Pearl | C++ | 20
 Darline | Minsky | Neural Networks | 20
 Collin | Herik | Networking | 20
-Christoph | Fox | Machine Learning | 30
-Pasquale | Allen | Coding | 30
-Rickard | Fox | Algorithms | 20
-Lesley | Ballard | AI | 20
-Heddi | Ballard | Neural Networks | 30
-Adriano | Pearl | Coding | 20
-Alysa | Norvig | Machine Learning | 20
-Skipp | Herik | Machine Learning | 30
-Jedidiah | Pearl | C | 20
-Marissa | Minsky | Neural Networks | 20
-Kimbell | Herik | Networking | 30
-Amity | Herik | AI | 20
-Marci | Allen | Security | 30
-Isac | Ballard | Networking | 20
-Shelagh | Ballard | Coding | 20
-Marcille | Ballard | Algorithms | 20
-Suzi | Norvig | C | 20
-Dyan | Ballard | AI | 20
-Raquela | Pearl | C++ | 30
-Nanine | Fox | Javascript | 20
-Korney | Ballard | C | 30
-Cynthie | Fox | Algorithms | 20
-Andy | Minsky | Neural Networks | 20
-Gunter | Minsky | C | 20
-Aaren | Tanenbaum | AI | 30

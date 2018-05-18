@@ -1,6 +1,7 @@
 from random import *
 from macros import *
 from fitness import calculate_fitness
+from utilities import generate_except
 
 
 def mutate_room(conference):
@@ -13,7 +14,7 @@ def mutate_day(conference):
 
 
 def mutate_time(conference):
-    conference[randint(0, len(conference)-1)]['time'] = randint(0, MAX_START_BLOCK)
+    conference[randint(0, len(conference)-1)]['time'] = generate_except(0, MAX_START_BLOCK, INVALID_BLOCKS)
     return conference
 
 
