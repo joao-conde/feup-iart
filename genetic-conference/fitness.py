@@ -36,6 +36,8 @@ def calculate_fitness(individual):
     if FIT_SESSIONS:
         scores.append(score_sessions(individual))
 
+    print(scores)
+
     return mean(scores)
 
 
@@ -43,7 +45,6 @@ def calculate_fitness(individual):
     Scores an individual, based on the number of conflicting talks.
     The grading system follows the formula: 100 - 100/TalkNo * CollisionNo.
     TODO: For now, it's considering collisions even it is in separate rooms.
-    TODO: Also, it's only considering inner collisions, when it should detect edge.
 """
 def score_collisions(individual):
 
@@ -55,13 +56,27 @@ def score_collisions(individual):
     breaks = [Interval([COFFEE_1_START, COFFEE_1_END]), Interval([LUNCH_START, LUNCH_END]), Interval([COFFEE_2_START, COFFEE_2_END])]
 
     # Counts the number of paper-paper conflicts.
-    for ia, ib in itertools.combinations(intervals, 2):
-        if (ia in ib) : conflicts += 1
+    conflicts += count_paper_collisions(intervals)
 
     # Counts the number of paper-break conflicts.
     conflicts += len([inter for inter in intervals if any((inter in x) for x in breaks)])
         
     return 100 - 100 // len(individual) * conflicts  # Calculate fitness score.
+
+
+"""
+"""
+def count_paper_collisions(intervals):
+    conflicts = 0
+
+    for ia, ib in itertools.combinations(intervals, 2):
+        if ((ia < ib and (ia.upper > ib.lower or ib.lower < ia.upper)) or 
+            (ia > ib and (ib.upper > ia.lower or ia.lower < ib.upper)) or
+            (ia in ib) or (ib in ia) or (ia == ib)): 
+                print(ia, ib)
+                conflicts += 1
+
+    return conflicts
 
 
 """
@@ -89,6 +104,8 @@ def score_sessions(individual):
         for day_i in range(3):
             room_talk = [talk for talk in individual if talk['room'] == room_i + 1 and talk['day'] == day_i + 1]
             room_talks.append(room_talk)
+
+    
             
     return 100
     
