@@ -16,6 +16,7 @@ import time
 
 #logger = open('logger.txt', 'w+')
 
+
 """
     Genetic Algorithm based scheduler application entry point.
 """
@@ -25,10 +26,14 @@ def main():
     print('\n⏳  Genetic Conference Scheduler (v5.4)')
     
     # Initialize population.
-    #papers = parse_paper_file(input('Paper file path: '))
-    papers = parse_paper_file("papers_mock.txt")
+    papers = parse_paper_file(input('Paper file path: '))
     
-    #wb_path = input('Spreadsheet path: ')
+    #papers = parse_paper_file("papers_mock.txt")
+    
+    wb_path = input('Spreadsheet path: ')
+    #wb_path = "results.xlsx"
+    global EXPORT_PATH
+    EXPORT_PATH = wb_path
     
     population = init_population(papers)
     for gen_no in range(GENERATIONS):
@@ -44,21 +49,17 @@ def manage_generation(population):
     scores = calculate_pop_fitness(population)
     max_score = max(scores)
     fittest = copy.deepcopy(population[scores.index(max_score)])
+    
+    #if ctrl+c hits the program, best scheduling is saved
+    global TO_EXPORT
+    TO_EXPORT = fittest
 
     print(f"\n\nELITE:{max_score}\n\n")
-    export_to_spreadsheet('results.xlsx', fittest)
-    if max_score == DESIRED_FITNESS : return
 
-    #print_conference(fittest)
     #logger.write(str(max_score) + "\n")
 
     for i, score in enumerate(scores):
-        if score >= DESIRED_FITNESS:
-            #print_conference(population[i])
-            #export_to_spreadsheet('results.xlsx', population[i])
-            #input('')
-            #time.sleep(2)
-            pass
+        if score >= DESIRED_FITNESS: exit()
             
 
     # Crossover selection.
@@ -124,15 +125,15 @@ def init_population(papers):
     return population
 
 
-'''
-def signal_handler(signal, frame):
-    print_conference(fittest)
-    export_to_spreadsheet("results.xlsx", fittest)
-    print("\nSAVED BEST SCHEDULING TO EXCEL SHEET")
+
+def exit():
+    export_to_spreadsheet(EXPORT_PATH, TO_EXPORT)
+    print("\n\nSaved best scheduling found to", EXPORT_PATH, ".xlsx")
     sys.exit(0)
 
 
-signal.signal(signal.SIGINT, signal_handler)
-'''
+def signal_handler(signal, frame): exit()
+
 #program entry point
+signal.signal(signal.SIGINT, signal_handler)
 main()

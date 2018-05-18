@@ -32,9 +32,6 @@ def calculate_fitness(individual):
     if FIT_BREAK_COLLISIONS:
         scores.append(WEIGHT_BREAK_COLL * score_break_collisions(individual))
 
-    if FIT_ROOM_OCC:
-        scores.append(score_room_occupation(individual))
-
     if FIT_SPEAKER_OCC:
         scores.append(WEIGHT_SPEAKER_COLL * score_speaker_occupation(individual))
         
@@ -86,18 +83,6 @@ def count_paper_collisions(intervals):
             
     return conflicts
 
-
-"""
-    Scores an individual, based on the balance of room occupation.
-    TODO: Variance calculation isn't perfectly fine.
-"""
-def score_room_occupation(individual):
-    rooms, counts = [talk.get('room') for talk in individual], []
-
-    for room_i in range(NUMBER_OF_ROOMS):
-        counts.append(rooms.count(room_i))
-
-    return 100 - stdev(counts) / len(individual) * 100
 
 
 def score_break_collisions(individual):

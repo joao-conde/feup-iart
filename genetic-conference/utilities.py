@@ -31,7 +31,7 @@ def export_to_spreadsheet(wb_path, individual):
         for dur in range(talk['paper'].duration // 10):
             ws.cell(row=r + dur, column=c, value=talk['paper'].id)
 
-    wb.save('results.xlsx')
+    wb.save(wb_path + '.xlsx')
 
 
 
