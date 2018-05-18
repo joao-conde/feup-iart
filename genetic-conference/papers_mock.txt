@@ -1,0 +1,100 @@
+Ernie | Fox | Machine Learning | 20
+Modesta | Tanenbaum | Neural Networks | 30
+Wright | Herik | Coding | 30
+Vivyan | Pearl | Neural Networks | 20
+Lorraine | Herik | Coding | 20
+Kakalina | Minsky | C | 30
+Zulema | Minsky | Javascript | 30
+Allina | Herik | C++ | 30
+Aviva | Minsky | Machine Learning | 30
+Blake | Allen | C | 30
+Nataline | Allen | Coding | 30
+Celka | Tanenbaum | Neural Networks | 30
+Nicolas | Fox | Machine Learning | 20
+Didi | Minsky | Javascript | 20
+Melodee | Pearl | Security | 20
+Janet | Ballard | Networking | 30
+Colan | Herik | Coding | 30
+Ludovika | Minsky | C++ | 20
+Rubi | Ballard | Algorithms | 20
+Anitra | Minsky | Coding | 20
+Sarge | Minsky | C | 30
+Antony | Fox | Machine Learning | 30
+Noll | Pearl | C++ | 20
+Darline | Minsky | Neural Networks | 20
+Collin | Herik | Networking | 20
+Christoph | Fox | Machine Learning | 30
+Pasquale | Allen | Coding | 30
+Rickard | Fox | Algorithms | 20
+Lesley | Ballard | AI | 20
+Heddi | Ballard | Neural Networks | 30
+Adriano | Pearl | Coding | 20
+Alysa | Norvig | Machine Learning | 20
+Skipp | Herik | Machine Learning | 30
+Jedidiah | Pearl | C | 20
+Marissa | Minsky | Neural Networks | 20
+Kimbell | Herik | Networking | 30
+Amity | Herik | AI | 20
+Marci | Allen | Security | 30
+Isac | Ballard | Networking | 20
+Shelagh | Ballard | Coding | 20
+Marcille | Ballard | Algorithms | 20
+Suzi | Norvig | C | 20
+Dyan | Ballard | AI | 20
+Raquela | Pearl | C++ | 30
+Nanine | Fox | Javascript | 20
+Korney | Ballard | C | 30
+Cynthie | Fox | Algorithms | 20
+Andy | Minsky | Neural Networks | 20
+Gunter | Minsky | C | 20
+Aaren | Tanenbaum | AI | 30
+Zollie | Ballard | Machine Learning | 20
+Wanda | Minsky | AI | 30
+Ileane | Fox | C | 30
+Leoline | Norvig | Networking | 20
+Cathlene | Tanenbaum | Security | 30
+Hal | Allen | AI | 20
+Carmen | Minsky | Algorithms | 30
+Corri | Pearl | C++ | 20
+Ardine | Pearl | Javascript | 20
+Revkah | Fox | Machine Learning | 30
+Dianna | Ballard | Neural Networks | 30
+Marlie | Tanenbaum | Security | 20
+Dari | Norvig | C | 30
+Broddy | Pearl | Javascript | 20
+Abbey | Ballard | Networking | 20
+Krispin | Minsky | Coding | 30
+Viviana | Fox | Javascript | 20
+Richmound | Fox | Neural Networks | 30
+Cull | Pearl | C | 30
+Teddie | Herik | C++ | 20
+Kirby | Norvig | Neural Networks | 20
+Alonzo | Pearl | Networking | 30
+Clevie | Pearl | AI | 30
+Hobey | Pearl | Networking | 20
+Stavros | Norvig | Algorithms | 20
+Lauralee | Tanenbaum | AI | 30
+Christos | Allen | AI | 20
+Karylin | Ballard | Algorithms | 20
+Aylmer | Minsky | Algorithms | 20
+Anatol | Pearl | AI | 30
+Jehu | Tanenbaum | Javascript | 20
+Jocelyne | Fox | Security | 30
+Evie | Ballard | Security | 30
+Erastus | Fox | Machine Learning | 30
+Christan | Fox | Neural Networks | 20
+Ramona | Minsky | Javascript | 20
+Arnie | Herik | C++ | 30
+Coralie | Herik | AI | 20
+Bancroft | Pearl | Neural Networks | 30
+Rafa | Tanenbaum | Security | 20
+Valentia | Norvig | C++ | 30
+Nanon | Fox | AI | 30
+Guenna | Herik | Algorithms | 20
+Evvy | Allen | C | 20
+Leopold | Tanenbaum | C | 30
+Wyn | Ballard | Algorithms | 30
+Tracy | Herik | Machine Learning | 20
+Kelcey | Allen | Algorithms | 30
+Trenna | Norvig | Neural Networks | 30
+Aldric | Minsky | Networking | 20

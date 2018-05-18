@@ -116,7 +116,7 @@ def score_sessions(individual):
 
 
 '''
-    Same speaker required in 2 or more rooms at the same time
+    Same speaker required in 2 or more rooms at the same time, per day
 '''
 def score_speaker_occupation(individual):
     
@@ -132,7 +132,9 @@ def score_speaker_occupation(individual):
 
     return 100 - collisions / len(individual) * 100
 
-
+'''
+    Speaker required in 2 or more rooms in the same time
+'''
 def score_collisions_speaker(day_talks):
     collisions = 0
     daily_speakers = set([talk['paper'].speaker for talk in day_talks])
