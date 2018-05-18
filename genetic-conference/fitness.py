@@ -1,6 +1,7 @@
 from intervals import *
 from macros import *
 from statistics import stdev, mean
+from utilities import *
 import itertools
 
 
@@ -39,6 +40,10 @@ def calculate_fitness(individual):
     return mean(scores)
 
 
+# Receives a talk dictionary entry and returns the interval of time allocated to that resource.
+def construct_interval(talk):
+    return Interval([talk.get('time'), talk.get('time') + talk.get('paper').duration // 10])
+
 """
     Scores an individual, based on the number of conflicting talks.
     The grading system follows the formula: 100 - 100/TalkNo * CollisionNo.
@@ -47,9 +52,7 @@ def calculate_fitness(individual):
 """
 def score_collisions(individual):
 
-    # Receives a talk dictionary entry and returns the interval of time allocated to that resource.
-    def construct_interval(talk):
-        return Interval([talk.get('time'), talk.get('time') + talk.get('paper').duration // 10])
+    
 
     intervals, conflicts = [construct_interval(talk) for talk in individual], 0
     breaks = [Interval([COFFEE_1_START, COFFEE_1_END]), Interval([LUNCH_START, LUNCH_END]), Interval([COFFEE_2_START, COFFEE_2_END])]
@@ -82,24 +85,49 @@ def score_room_occupation(individual):
 def score_sessions(individual):
     room_talks = []
 
-    """
-        Each element of room_talk list is a list of talks had on a specific room and day.
-    """
     for room_i in range(NUMBER_OF_ROOMS):
         for day_i in range(3):
             room_talk = [talk for talk in individual if talk['room'] == room_i + 1 and talk['day'] == day_i + 1]
             room_talks.append(room_talk)
-            
+
+    
     return 100
     
 
 
 '''
-    Speakers requeridos ao mesmo tempo
+    Same speaker required in 2 or more rooms at the same time
 '''
 def score_speaker_occupation(individual):
-    return 0
+    
+    collisions = 0
 
+    day1 = [talk for talk in individual if talk['day'] == 1]
+    day2 = [talk for talk in individual if talk['day'] == 2]
+    day3 = [talk for talk in individual if talk['day'] == 3]  
+
+    collisions += score_collisions_speaker(day1)
+    collisions += score_collisions_speaker(day2)
+    collisions += score_collisions_speaker(day3)
+
+    return 100 - collisions / len(individual) * 100
+
+
+def score_collisions_speaker(day_talks):
+    collisions = 0
+    daily_speakers = set([talk['paper'].speaker for talk in day_talks])
+
+    for speaker in daily_speakers:
+        sp_talks = [talk for talk in day_talks if talk['paper'].speaker == speaker]
+
+        for talk in sp_talks:
+            collisions += count_collisions(construct_interval(talk))
+
+    return collisions
+
+
+def count_collisions(intervals):
+    return 0
 
 
 def get_most_fit(pop_scores):
@@ -111,6 +139,3 @@ def get_worst_fit_pos(pop_scores):
     return scores.index(min(scores))
 
 
-'''
-    Speakers requeridos ao mesmo tempo
-'''

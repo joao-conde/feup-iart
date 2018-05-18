@@ -38,8 +38,8 @@ def manage_generation(population):
     scores = calculate_pop_fitness(population)
     fittest = get_most_fit(scores)
 
-    print("ELITE:", calculate_fitness(fittest))
-    print_conference(fittest)
+    #print("ELITE:", calculate_fitness(fittest))
+    #print_conference(fittest)
 
     for score in scores:
         if score[1] >= DESIRED_FITNESS:

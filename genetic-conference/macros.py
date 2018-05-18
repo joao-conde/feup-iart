@@ -2,7 +2,7 @@
 GENERATIONS = 2000
 NUMBER_OF_CROMOSSOMES = 6
 MUTATION = 0.01
-DESIRED_FITNESS = 85
+DESIRED_FITNESS = 95
 
 # Conference limitations
 NUMBER_OF_ROOMS =   4
@@ -17,9 +17,9 @@ COFFEE_2_START =    48
 COFFEE_2_END =      51
 
 # Fitness parameters
-FIT_COLLISIONS =    True
+FIT_COLLISIONS =    False
 FIT_ROOM_OCC =      False
-FIT_SPEAKER_OCC =   False
+FIT_SPEAKER_OCC =   True
 FIT_SESSIONS =      False
 
 # Spreadsheet parameters
