@@ -12,7 +12,7 @@ O trabalho consiste em aplicar metodologias de otimização (Algoritmos Genétic
 
 
 
-##NOTAS
+## NOTAS
 
 Assume-se que:
 
