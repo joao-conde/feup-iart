@@ -5,7 +5,7 @@ MUTATION = 0.01
 DESIRED_FITNESS = 85
 
 # Conference limitations
-NUMBER_OF_ROOMS =   4
+NUMBER_OF_ROOMS =   3
 MAX_START_BLOCK =   57
 
 # Break Scheduling

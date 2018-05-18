@@ -44,22 +44,35 @@ def calculate_fitness(individual):
 """
     Scores an individual, based on the number of conflicting talks.
     The grading system follows the formula: 100 - 100/TalkNo * CollisionNo.
-    TODO: For now, it's considering collisions even it is in separate rooms.
 """
 def score_collisions(individual):
 
     # Receives a talk dictionary entry and returns the interval of time allocated to that resource.
     def construct_interval(talk):
-        return Interval([talk.get('time'), talk.get('time') + talk.get('paper').duration // 10])
+        return Interval([talk['time'], talk['time'] + talk['paper'].duration // 10])
 
-    intervals, conflicts = [construct_interval(talk) for talk in individual], 0
+    conflicts = 0
     breaks = [Interval([COFFEE_1_START, COFFEE_1_END]), Interval([LUNCH_START, LUNCH_END]), Interval([COFFEE_2_START, COFFEE_2_END])]
 
+    # Generates a list of organized intervals.
+    s_talks, i_talks = [], []
+
+    for day_i in range(3):
+        for room_i in range(NUMBER_OF_ROOMS):
+            room_talk = [talk for talk in individual if talk['room'] == room_i + 1 and talk['day'] == day_i + 1]
+            s_talks.append(room_talk)
+
+    for i in range(3 * NUMBER_OF_ROOMS):
+        intervals = [construct_interval(talk) for talk in s_talks[i]]
+        i_talks.append(intervals)
+        
     # Counts the number of paper-paper conflicts.
-    conflicts += count_paper_collisions(intervals)
+    conflicts += sum([count_paper_collisions(sit) for sit in i_talks])
 
     # Counts the number of paper-break conflicts.
     conflicts += len([inter for inter in intervals if any((inter in x) for x in breaks)])
+
+    print(conflicts)
         
     return 100 - 100 // len(individual) * conflicts  # Calculate fitness score.
 
@@ -73,7 +86,6 @@ def count_paper_collisions(intervals):
         if ((ia < ib and (ia.upper > ib.lower or ib.lower < ia.upper)) or 
             (ia > ib and (ib.upper > ia.lower or ia.lower < ib.upper)) or
             (ia in ib) or (ib in ia) or (ia == ib)): 
-                print(ia, ib)
                 conflicts += 1
 
     return conflicts
@@ -100,8 +112,8 @@ def score_sessions(individual):
     """
         Each element of room_talk list is a list of talks had on a specific room and day.
     """
-    for room_i in range(NUMBER_OF_ROOMS):
-        for day_i in range(3):
+    for day_i in range(3):
+        for room_i in range(NUMBER_OF_ROOMS):
             room_talk = [talk for talk in individual if talk['room'] == room_i + 1 and talk['day'] == day_i + 1]
             room_talks.append(room_talk)
 
