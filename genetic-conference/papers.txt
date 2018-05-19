@@ -1,25 +1,13 @@
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Understanding Neural Networks | Minsky | AI, Machine Learning | 30
-Cracking GO by Scratch | Minsky | Machine Learning | 20
-Cracking GO by Scratch | Minsky | Machine Learning | 20
-Cracking GO by Scratch | Minsky | Machine Learning | 20
-Cracking GO by Scratch | Minsky | Machine Learning | 20
-Cracking GO by Scratch | Minsky | Machine Learning | 20
-Cracking GO by Scratch | Minsky | Machine Learning | 20
-Cracking GO by Scratch | Minsky | Machine Learning | 20
-Predicting an Heart Attack | Norvig | AI, Medicine | 30
-Introduction to SPOJ | Restivo | Coding, C++ | 30
-Origami Programming | Sereno | Coding, Javascript | 20
-Infiltrating WPA | Restivo | Security, C++ | 30
-Visualizing Live Development | Ademar | VR | 20
-Advanced Distributed Systems | Souto | SDIS, IT | 30
-SDIS 101: quick tips | Souto | SDIS, IT | 20
-Entropy in ID3 algorithm | HLC | IART, IT | 30
-Im a superhero, by Firmino | Firmino | PPIN, Bugigangas | 30 
+Ernie | Fox | Machine Learning | 20
+Modesta | Tanenbaum | Neural Networks | 30
+Wright | Herik | Coding | 30
+Vivyan | Pearl | Neural Networks | 20
+Lorraine | Herik | Coding | 20
+Kakalina | Minsky | C | 30
+Zulema | Minsky | Javascript | 30
+Allina | Herik | C++ | 30
+Aviva | Minsky | Machine Learning | 30
+Blake | Allen | C | 30
+Anitra | Minsky | Coding | 20
+Sarge | Minsky | C | 30
+Antony | Fox | Machine Learning | 30

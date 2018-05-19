@@ -104,13 +104,14 @@ def score_sessions_theme(individual):
         theme_set = set(themes)
         
         if len(theme_set) != 1: diversity += len(theme_set)
-        
+
         themes = []
         room_i_afternoon_session_themes_list= [talk['paper'].themes for talk in individual if talk['room'] == room_i+1 and talk['time'] >= AFTERNOON_SESSION_START and talk['time'] <= AFTERNOON_SESSION_END]
         for theme_list in room_i_afternoon_session_themes_list: themes.extend(theme_list)
         theme_set = set(themes)
         
         if len(theme_set) != 1: diversity += len(theme_set)
+
         
     return diversity/len(individual)
     

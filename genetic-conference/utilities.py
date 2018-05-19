@@ -29,7 +29,8 @@ def export_to_spreadsheet(wb_path, individual):
         r = SHEET_ROW_START + talk['time']
 
         for dur in range(talk['paper'].duration // 10):
-            ws.cell(row=r + dur, column=c, value=talk['paper'].id)
+            cell_value = str(talk['paper'].id) + ' - ' + talk['paper'].title
+            ws.cell(row=r + dur, column=c, value=cell_value)
 
     wb.save(wb_path + '.xlsx')
 

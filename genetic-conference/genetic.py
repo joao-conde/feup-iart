@@ -58,8 +58,8 @@ def manage_generation(population):
 
     #logger.write(str(max_score) + "\n")
 
-    for i, score in enumerate(scores):
-        if score >= DESIRED_FITNESS: exit()
+    #for i, score in enumerate(scores):
+       # if score >= DESIRED_FITNESS: exit()
             
 
     # Crossover selection.
@@ -128,7 +128,7 @@ def init_population(papers):
 
 def exit():
     export_to_spreadsheet(EXPORT_PATH, TO_EXPORT)
-    print("\n\nSaved best scheduling found to", EXPORT_PATH, ".xlsx")
+    print("\n\nSaved best scheduling found to" + EXPORT_PATH + ".xlsx")
     sys.exit(0)
 
 
