@@ -14,8 +14,7 @@ from utilities import *
 
 import time
 
-#logger = open('logger.txt', 'w+')
-
+logger = open('../files/logs.txt', 'w+')
 
 """
     Genetic Algorithm based scheduler application entry point.
@@ -23,27 +22,26 @@ import time
 def main():
 
     seed(time.time())
-    print('\n⏳  Genetic Conference Scheduler (v5.4)')
+    print('\n⏳  Genetic Conference Scheduler (v5.5)')
     
-    # Initialize population.
-    papers = parse_paper_file(input('Paper file path: '))
-    
-    #papers = parse_paper_file("papers_mock.txt")
-    
+    # Read papers file, set excel sheet export filename and logger file
+    papers = parse_paper_file(input('Paper file path: '))    
     wb_path = input('Spreadsheet path: ')
-    #wb_path = "results.xlsx"
+
     global EXPORT_PATH
     EXPORT_PATH = wb_path
     
     population = init_population(papers)
     for gen_no in range(GENERATIONS):
-        print(f'-----Handling generation #{gen_no + 1}-----\n')
-        population = manage_generation(population)
+        print(f'----- Handling generation #{gen_no + 1} -----')
+        population = manage_generation(gen_no, population)
 
 
 """
+    Processes each generation applying fitness, crossover based on that and mutation.
+    Returns the new population
 """
-def manage_generation(population):
+def manage_generation(gen_no, population):
 
     # Evaluate each individual from the population.
     scores = calculate_pop_fitness(population)
@@ -54,13 +52,13 @@ def manage_generation(population):
     global TO_EXPORT
     TO_EXPORT = fittest
 
-    print(f"\n\nELITE:{max_score}\n\n")
+    print(f"\nFITTEST: {max_score}\n\n\n")
+    logger.write("GEN No. " + str(gen_no+1) + " ELITE SCORE: " + str(max_score) + "\n")
 
-    #logger.write(str(max_score) + "\n")
+    if max_score >= DESIRED_FITNESS: exit()
+                
 
-    #for i, score in enumerate(scores):
-       # if score >= DESIRED_FITNESS: exit()
-            
+    #------------- GENETIC ALGORITHM -------------#
 
     # Crossover selection.
     roulette = generate_roulette(population, scores)
@@ -74,7 +72,7 @@ def manage_generation(population):
     zombies, scores = zombies_tuple[0], zombies_tuple[1]
 
     # Elitism - replace the worst child of gen N by the best of gen N-1
-    population = elitism_policy(zombies, scores, fittest)
+    population = immortality_policy(zombies, scores, fittest)
 
     # Return new generation.
     return population
@@ -112,7 +110,6 @@ def init_population(papers):
     def init_conference(papers):
         conference = []
         
-        
         for paper in papers:
             gen_room, gen_day, gen_block = randint(1, NUMBER_OF_ROOMS), randint(1, 3), generate_except(0, MAX_START_BLOCK, INVALID_BLOCKS)
             conference.append({'paper': paper, 'room': gen_room, 'day': gen_day, 'time': gen_block})
@@ -125,13 +122,17 @@ def init_population(papers):
     return population
 
 
-
+"""
+    Saves the current best schedule to an excel sheet 
+"""
 def exit():
     export_to_spreadsheet(EXPORT_PATH, TO_EXPORT)
-    print("\n\nSaved best scheduling found to" + EXPORT_PATH + ".xlsx")
+    print("\n\nSaved best scheduling found to " + EXPORT_PATH + ".xlsx")
     sys.exit(0)
 
-
+"""
+    If CTRL+C is used, saves the current best schedule to an excel sheet
+"""
 def signal_handler(signal, frame): exit()
 
 #program entry point

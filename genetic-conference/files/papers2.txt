@@ -1,0 +1,9 @@
+Modesta1 | Tanenbaum1 | Neural Networks | 30
+Modesta2 | Tanenbaum2 | Neural Networks | 30
+Modesta3 | Tanenbaum3 | Neural Networks | 30
+Modesta4 | Tanenbaum4 | Neural Networks | 30
+Modesta5 | Tanenbaum5 | Neural Networks | 30
+Modesta6 | Tanenbaum6 | Neural Networks | 30
+Modesta7 | Tanenbaum7 | Neural Networks | 30
+Modesta8 | Tanenbaum8 | Neural Networks | 30
+Modesta9 | Tanenbaum9 | Neural Networks | 30

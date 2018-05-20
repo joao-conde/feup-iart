@@ -41,8 +41,8 @@ def spin_roulette(roulette, population):
 
 
 """
-    TODO: Specify how the crossover is done.
     Crossover two cromossomes.
+    50% chance for each talk of the schedule to be swapped with the other schedule talk (of the same paper).
     Returns the resulting child.
 """
 def xover_parents(mother, father):
@@ -74,8 +74,11 @@ def xover_population(couples):
     return children
 
 
-
-def elitism_policy(children, scores, fittest):
+"""
+    Immortality policy that preserves the fittest element intact for the next generation.
+    Still allows crossover with the fittest.
+"""
+def immortality_policy(children, scores, fittest):
     children[scores.index(min(scores))] = fittest
     return children
     

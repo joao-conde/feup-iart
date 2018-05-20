@@ -4,9 +4,10 @@ import openpyxl as sheets
 
 
 """
+    Export the schedule to excel spreadsheet.
 """
 def export_to_spreadsheet(wb_path, individual):
-    wb = sheets.load_workbook('template.xlsx')
+    wb = sheets.load_workbook('../files/template.xlsx')
     ws = wb.active
 
     center = sheets.styles.Alignment(horizontal='center', vertical='center')
@@ -35,15 +36,9 @@ def export_to_spreadsheet(wb_path, individual):
     wb.save(wb_path + '.xlsx')
 
 
-
-def print_conference(conference, fitness = -1):
-    
-    if fitness != -1: print("FITNESS", fitness, '\n')
-    
-    for presentation in conference:
-        print(presentation['paper'], " --> room:", presentation['room'], "; day:", presentation['day'], "; time:", presentation['time'])
-
-
+"""
+    Generates an integer in range [lb,up] not in the invalid set.
+"""
 def generate_except(lb, up, invalid):
     gen = randint(lb,up)
     
