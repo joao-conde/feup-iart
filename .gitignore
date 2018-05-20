@@ -101,6 +101,8 @@ ENV/
 .mypy_cache/
 .pyc
 
+#logs
+logs.txt
 
 #excel files
 .xlsx

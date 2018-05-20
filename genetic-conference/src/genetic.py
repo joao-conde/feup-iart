@@ -3,7 +3,6 @@ import copy
 import signal
 import sys
 
-from morph import flatten
 from paper import *
 from random import *
 from macros import *
