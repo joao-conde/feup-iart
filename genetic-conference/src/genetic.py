@@ -13,7 +13,7 @@ from utilities import *
 
 import time
 
-logger = open('../files/logs.txt', 'w+')
+logger = None
 
 """
     Genetic Algorithm based scheduler application entry point.
@@ -24,11 +24,14 @@ def main():
     print('\n⏳  Genetic Conference Scheduler (v5.5)')
     
     # Read papers file, set excel sheet export filename and logger file
-    papers = parse_paper_file(input('Paper file path: '))    
+    papers = parse_paper_file('../files/' + input('Paper file path: '))    
     wb_path = input('Spreadsheet path: ')
 
     global EXPORT_PATH
-    EXPORT_PATH = wb_path
+    EXPORT_PATH += wb_path
+
+    global logger
+    logger = open('../files/' + EXPORT_PATH + '-logs.txt', 'w+')
     
     population = init_population(papers)
     for gen_no in range(GENERATIONS):
@@ -125,8 +128,8 @@ def init_population(papers):
     Saves the current best schedule to an excel sheet 
 """
 def exit():
-    export_to_spreadsheet(EXPORT_PATH, TO_EXPORT)
-    print("\n\nSaved best scheduling found to " + EXPORT_PATH + ".xlsx")
+    export_to_spreadsheet('../files/' + EXPORT_PATH, TO_EXPORT)
+    print("\n\nSaved best scheduling found to files/" + EXPORT_PATH + ".xlsx")
     sys.exit(0)
 
 """

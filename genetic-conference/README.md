@@ -1,17 +1,13 @@
 # Instructions
 
-In order to run, first run the install.sh script as sudo to install dependencies (python modules).
-If you already have them installed, it will do nothing.
+1 - Run the install.sh script (unix systems only) to install needed python modules. If you already have them installed, it will do nothing.
+2 - Run genetic.py script (with python3.5 or above).
+3 - Specify papers file (place it in folder 'files').
+4 - Specify the spreadsheet name to be filled with the schedule and outputed to folder 'files'.
+5 - Outputs the spreadsheet and a log file named 'logs-SPREADSHEET_NAME.txt'.
 
-After, proceed to run the script "genetic.py" using python3.6 or higher.
 
-When prompted by the program, insert the path to the .txt file containing the papers to fill the schedule with.
+# Notes
 
-Specify the excel output path with the schedule.
-NEVER DELETE TEMPLATE.XSLX - but you can edit it. 
-
-Using the current repository structure:
-	1-run "python genetic.py"
-	2-select a file from "files" with "../files/" + one of our example files
-	3-type the output path and filename (if no path is specified it will output to src)
+1 - DO NOT DELETE TEMPLATE.XSLX - but you can edit it, changing the overall look of the schedule outputed. 
 
