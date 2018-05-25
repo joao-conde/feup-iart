@@ -1,4 +1,4 @@
-Instructions
+# Instructions
 
 In order to run, first run the install.sh script as sudo to install dependencies (python modules).
 If you already have them installed, it will do nothing.
@@ -8,7 +8,7 @@ After, proceed to run the script "genetic.py" using python3.6 or higher.
 When prompted by the program, insert the path to the .txt file containing the papers to fill the schedule with.
 
 Specify the excel output path with the schedule.
-
+NEVER DELETE TEMPLATE.XSLX - but you can edit it. 
 
 Using the current repository structure:
 	1-run "python genetic.py"
