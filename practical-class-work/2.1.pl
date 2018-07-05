@@ -1,4 +1,5 @@
 :-use_module(library(lists)).
+
 % Dois baldes, de capacidades 4 litros e 3 litros, respetivamente, estão inicialmente vazios. Os baldes não possuem qualquer marcação intermédia.
 %  As únicas operações que pode realizar são:
 % esvaziar um balde
