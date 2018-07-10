@@ -1,7 +1,4 @@
 clear:-write('\33\[2J').
-% 10 palitos, tirar 1, 2 ou 3 palitos, quem tirar o último perde
-% representar o estado com número de palitos e próximo jogador
-% (10, max). % configuração
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Formalização do jogo dos palitos:
