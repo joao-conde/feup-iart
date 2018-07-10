@@ -25,25 +25,12 @@ child(7, 12).
 
 end(12).
 
-% dfs(Node):- format('testing ~d...', [Node]), child(Node, Child), end(Child), write('yes\n').
-% dfs(Node):- write('no\n'), child(Node, Child), dfs(Child).
-
-% bfs(Node):- format('testing ~d...', [Node]), child(Node, Child), end(Child), write('yes\n').
-% bfs(Node):- write('no\n'), child(Node, Child), bfs(Child).
-
 % Actions
 % esvaziar um balde
 % encher (completamente) um balde
 % despejar um balde para o outro até que o segundo fique cheio
 % despejar um balde para o outro até que o primeiro fique vazio
 
-% esvaziar(B-C, 0-C).
-% encher(B-C, C-C).
-% despejar(B1-C1, B2-C2, )
-
-
-% inicial: b(0,0).
-% final: b(2, _).
 
 % 2.1
 
@@ -82,14 +69,6 @@ dfs(E, V, [E|R]):-
     sucessor(E, E2),
     \+ member(E2, V),
     dfs(E2, [E2|V], R).
-
-% dfs(State):-estado_final(State), write('end').
-% dfs(State):-sucessor(State, NewState), format('testing ~p-...', [NewState]), dfs(NewState)
-
-% dfs(Node):- format('testing ~p-...', [Node]), sucessor(Node, Child), estado_final(Child), write('yes\n').
-% dfs(Node):- write('no\n'), sucessor(Node, Child), dfs(Child).
-
-% start(dfs):-estado_inicial(Node), dfs(Node).
 
 
 start(bfs, S):-estado_inicial(Node), bfs([[Node]], Sr), reverse(Sr, S).
